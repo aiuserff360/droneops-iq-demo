@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DroneOps IQ · Drone Operations Intelligence Platform</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b2a5e'/%3E%3Cg fill='none' stroke='%232f8bff' stroke-width='2.4'%3E%3Ccircle cx='9' cy='9' r='4'/%3E%3Ccircle cx='23' cy='9' r='4'/%3E%3Ccircle cx='9' cy='23' r='4'/%3E%3Ccircle cx='23' cy='23' r='4'/%3E%3Cpath d='M12 12l8 8M20 12l-8 8'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/infra.css">
+<link rel="stylesheet" href="css/droneops.css">
+</head>
+<body class="ws-ops">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="thermal" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values=".33 .5 .17 0 0 .33 .5 .17 0 0 .33 .5 .17 0 0 0 0 0 1 0"/><feComponentTransfer><feFuncR type="table" tableValues="0.02 0.25 0.62 0.90 1 1 1"/><feFuncG type="table" tableValues="0 0.02 0.10 0.32 0.62 0.90 1"/><feFuncB type="table" tableValues="0.12 0.45 0.55 0.18 0.02 0.20 0.85"/></feComponentTransfer></filter></svg>
+<div class="app">
+  <header class="topbar">
+    <div class="brand" onclick="VQ.go('cc')">
+      <div class="brand-row"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><g fill="none" stroke="#fff" stroke-width="2.4"><circle cx="8" cy="8" r="4.5"/><circle cx="24" cy="8" r="4.5"/><circle cx="8" cy="24" r="4.5"/><circle cx="24" cy="24" r="4.5"/><path d="M11.500 11.500l9 9M20.500 11.500l-9 9"/></g></svg><div class="brand-name">DroneOps <b>IQ</b></div></div>
+      <div class="brand-sub" id="brand-sub"></div>
+    </div>
+    <div class="brand-tag" id="brand-tag"></div>
+    <div class="search" onclick="VQ.openSearch()"><span id="ic-search"></span><span class="ph" id="search-ph"></span><kbd>/</kbd></div>
+    <div class="ws-switch" id="ws-switch"></div>
+    <div class="top-right">
+      <div class="nation" id="nation"></div>
+      <div class="top-meta">
+        <span class="wx"><span id="ic-sun"></span>28°C · Clear</span><span class="sep"></span>
+        <span class="date" id="date"></span><span class="sep"></span><span class="time" id="clock"></span><span class="sep"></span>
+        <button class="bell" onclick="VQ.go('alerts')" aria-label="Notifications"><span id="ic-bell"></span><i>3</i></button>
+        <div class="avatar">KK</div><div class="who"><b>Karan Kamal</b><span>Operations Center</span></div>
+      </div>
+    </div>
+  </header>
+  <aside class="rail"><nav id="rail"></nav><div class="rail-hero"><div class="rail-hero-txt" id="hero-txt"></div></div></aside>
+  <div class="main-wrap"><main id="main"></main><footer class="demo" id="demo"></footer></div>
+</div>
+<div class="ov" id="ov"><div class="box" id="ov-box"></div></div>
+<div class="toast" id="toast"></div>
+<div class="tip" id="tip"></div>
+<script>window.VQ_ONLY = 'ops';</script>
+<script src="js/core.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/data.js"></script>
+<script src="js/mmap.js"></script>
+<script src="js/screens/command.js"></script>
+<script src="js/screens/planning.js"></script>
+<script src="js/screens/planning2.js"></script>
+<script src="js/screens/ops.js"></script>
+<script src="js/screens/fleet.js"></script>
+<script src="js/screens/more.js"></script>
+<script src="js/journey.js"></script>
+<script>document.getElementById('ic-sun').innerHTML = VQ.I('sun'); VQ.start();</script>
+</body>
+</html>
