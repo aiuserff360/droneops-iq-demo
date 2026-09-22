@@ -39,7 +39,11 @@ VQ.ops = (() => {
       objective: 'Thermal and gas survey of column C-301, the overhead line and the furnace after this morning’s smoke alert, without sending people up.', detect: ['thermal', 'smoke', 'people', 'defects', 'objects'],
       risks: ['Hot work permit area: keep 15 m from flare header', 'Intrinsically safe zone: no landing inside the unit', 'Wind from SW carries any plume towards the drone’s return leg'], img: 'ref-feed-unit3.jpg' },
   };
+  D.projects = { dam: { name: 'North Ridge Dam', sector: 'Infrastructure', icon: 'barrier', live: 'M-2026-001' }, highway: { name: 'NH-44 Corridor', sector: 'Highways', icon: 'road', live: 'M-2026-002' }, refinery: { name: 'Refinery', sector: 'Oil &amp; Gas', icon: 'factory', live: 'M-2026-004' } };
   D.uc = () => D.usecases[VQ.store.get('uc', 'dam')] || D.usecases.dam;
+  D.project = () => D.projects[D.uc().key];
+  /* header switch: which project every screen is showing */
+  VQ.projectSwitch = () => { const cur = D.uc().key; return `<span class="ws-lbl">Project</span>` + Object.entries(D.projects).map(([k, p]) => `<button class="${k === cur ? 'on' : ''}" onclick="VQ.ops.setUc('${k}')" data-tip="${p.sector} · switches every screen to this project">${VQ.I(p.icon)}<span>${p.name}</span></button>`).join(''); };
   D.setUc = k => { VQ.store.set('uc', k); VQ.render(true); };
 
   /* ---------- payload catalogue ---------- */
@@ -54,7 +58,7 @@ VQ.ops = (() => {
     { id: 'M-2026-001', name: 'North Ridge Dam Inspection', use: 'Infrastructure', loc: 'Karnataka, India', drones: 'DR-001, DR-003, DR-007 (Swarm)', n: 3, start: '16 Sep 08:00', status: 'In Progress', pct: 65, alerts: 1, uc: 'dam', img: 'th-eo.jpg' },
     { id: 'M-2026-002', name: 'NH-44 Corridor Patrol', use: 'Highways', loc: 'Telangana, India', drones: 'DR-002, DR-009 (Swarm)', n: 2, start: '16 Sep 07:45', status: 'In Progress', pct: 40, alerts: 1, uc: 'highway', img: 'feed-highway.jpg' },
     { id: 'M-2026-003', name: 'Main Canal Patrol Km 20–50', use: 'Water', loc: 'Andhra Pradesh, India', drones: 'DR-012', n: 1, start: '16 Sep 07:15', status: 'In Progress', pct: 70, alerts: 1, img: 'canal-pump-hose.jpg' },
-    { id: 'M-2026-004', name: 'Refinery PU3 Thermal Inspection', use: 'Oil &amp; Gas', loc: 'Andhra Pradesh, India', drones: 'DR-006, DR-011', n: 2, start: '16 Sep 10:00', status: 'Scheduled', pct: 0, alerts: 0, uc: 'refinery', img: 'ref-feed-unit3.jpg' },
+    { id: 'M-2026-004', name: 'Refinery PU3 Thermal Inspection', use: 'Oil &amp; Gas', loc: 'Andhra Pradesh, India', drones: 'DR-006, DR-011', n: 2, start: '16 Sep 08:30', status: 'In Progress', pct: 20, alerts: 1, uc: 'refinery', img: 'ref-feed-unit3.jpg' },
     { id: 'M-2026-005', name: 'Solar Farm Survey', use: 'Renewable Energy', loc: 'Rajasthan, India', drones: 'DR-015', n: 1, start: '16 Sep 10:30', status: 'Scheduled', pct: 0, alerts: 0, img: 'canal-fields.jpg' },
     { id: 'M-2026-006', name: 'Perimeter Patrol', use: 'Security', loc: 'Pune, India', drones: 'DR-005, DR-010 (Auto)', n: 2, start: '16 Sep 06:00', status: 'Completed', pct: 100, alerts: 0, img: 'feed-perimeter.jpg' },
     { id: 'M-2026-007', name: 'Flood Damage Assessment', use: 'Emergency Response', loc: 'Kerala, India', drones: 'DR-018, DR-019, DR-021 (Swarm)', n: 3, start: '16 Sep 07:00', status: 'In Progress', pct: 40, alerts: 1, img: 'feed-bridge.jpg' },
@@ -68,14 +72,14 @@ VQ.ops = (() => {
   D.drones = [
     { id: 'DR-001', name: 'Falcon-1', model: 'DJI Matrice 350', type: 'Multirotor', status: 'In Mission', batt: 78, loc: 'North Ridge', last: 'Today, 07:12', hours: 412, img: 'dr-multi.jpg', mission: 'M-2026-001' }, { id: 'DR-002', name: 'SkyScan-2', model: 'Autel EVO Max', type: 'Multirotor', status: 'In Mission', batt: 69, loc: 'NH-44 Km 81', last: 'Today, 07:45', hours: 256, img: 'dr-multi.jpg', mission: 'M-2026-002' },
     { id: 'DR-003', name: 'Terra-01', model: 'Autel EVO Max', type: 'Multirotor', status: 'In Mission', batt: 64, loc: 'North Ridge', last: 'Today, 08:15', hours: 198, img: 'dr-multi.jpg', mission: 'M-2026-001' }, { id: 'DR-004', name: 'Inspect-1', model: 'WingtraOne', type: 'Fixed Wing', status: 'Charging', batt: 45, loc: 'Base - HQ', last: 'Today, 05:30', hours: 620, img: 'dr-fixed.jpg' },
-    { id: 'DR-005', name: 'Map-Alpha', model: 'eBee X', type: 'Fixed Wing', status: 'Standby', batt: 96, loc: 'Base - HQ', last: 'Yesterday, 16:22', hours: 510, img: 'dr-wing.jpg' }, { id: 'DR-006', name: 'Thermo-2', model: 'DJI Mavic 3T', type: 'Multirotor', status: 'Standby', batt: 97, loc: 'Refinery dock B', last: 'Yesterday, 17:40', hours: 302, img: 'dr-multi.jpg' },
+    { id: 'DR-005', name: 'Map-Alpha', model: 'eBee X', type: 'Fixed Wing', status: 'Standby', batt: 96, loc: 'Base - HQ', last: 'Yesterday, 16:22', hours: 510, img: 'dr-wing.jpg' }, { id: 'DR-006', name: 'Thermo-2', model: 'DJI Mavic 3T', type: 'Multirotor', status: 'In Mission', batt: 82, loc: 'Refinery PU3', last: 'Today, 08:30', hours: 302, img: 'dr-multi.jpg', mission: 'M-2026-004' },
     { id: 'DR-007', name: 'Perim-3', model: 'DJI Mavic 3T', type: 'Multirotor', status: 'In Mission', batt: 71, loc: 'North Ridge', last: 'Today, 07:55', hours: 188, img: 'dr-multi.jpg', mission: 'M-2026-001' }, { id: 'DR-008', name: 'Cargo-1', model: 'Volansi VOLY', type: 'VTOL', status: 'In Maintenance', batt: null, loc: 'Service Center', last: '—', hours: 376, img: 'dr-vtol.jpg' },
   ];
   D.droneTone = { 'In Mission': 'solid-good', Standby: 'info', Charging: 'warn', 'In Maintenance': 'crit', Offline: 'gray' };
 
   /* ---------- alerts (3 active) ---------- */
   D.alerts = [
-    { id: 'AL-0916-01', title: 'Smoke Detected', sev: 'critical', where: 'Refinery · Process Unit 3, distillation column', at: '08:37 AM', conf: 96, src: 'Thermal + drone verified', img: 'al-smoke.jpg', mission: 'M-2026-004', text: 'Fixed thermal camera raised it; DR-006 can be on scene in 4 minutes if the 10:00 inspection is brought forward.' },
+    { id: 'AL-0916-01', title: 'Smoke Detected', sev: 'critical', where: 'Refinery · Process Unit 3, distillation column', at: '08:37 AM', conf: 96, src: 'Thermal + drone verified', img: 'al-smoke.jpg', mission: 'M-2026-004', text: 'Fixed thermal camera raised it. The 10:00 inspection was brought forward: DR-006 launched at 08:30 and is verifying from 40 m.' },
     { id: 'AL-0916-02', title: 'Thermal Anomaly', sev: 'high', where: 'North Ridge Dam · downstream toe, chainage 140 m', at: '08:21 AM', conf: 89, src: 'DR-007 thermal', img: 'th-thermal.jpg', mission: 'M-2026-001', text: 'A cold band 6 m long on the downstream slope: the pattern of seepage. Swarm re-tasked DR-007 for a second pass.' },
     { id: 'AL-0916-03', title: 'Stalled Vehicle in Live Lane', sev: 'medium', where: 'NH-44 · Km 84.5 southbound', at: '07:56 AM', conf: 91, src: 'DR-002 zoom camera', img: 'hw-cam-stalled-truck.jpg', mission: 'M-2026-002', text: 'Truck stationary in lane 2 for over 3 minutes. Position and clip sent to the highway control room.' },
   ];

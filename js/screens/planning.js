@@ -23,7 +23,7 @@ VQ.Plan = (() => {
 
   function head({ vid }) { const U = D.uc(), top = NAV.findIndex(n => n[1].some(x => x[0] === vid)), step = SEQ.indexOf(vid);
     return `<div class="page-head"><div><h1>Mission Planning</h1><div class="sub">${SUB[vid]}</div></div><div class="head-right">
-        <div class="seg" data-tip="Three worked use cases. The platform itself is use-case neutral.">${Object.values(D.usecases).map(u => `<button class="${u.key === U.key ? 'on' : ''}" onclick="VQ.ops.setUc('${u.key}')">${u.label}</button>`).join('')}</div>
+        <div class="mission-chip"><div><span class="small t2">Project</span><b>${D.project().name} · ${D.project().sector}</b></div></div>
         <div class="mission-chip"><div><b>Mission: ${U.id}</b>${U.name}</div>${UI.pill('Draft', 'good')}<div class="t2">Last saved<br><b class="ink" style="font-size:12px">Today, 08:40 AM</b></div></div></div></div>
       <div class="ptabs">${NAV.map((n, i) => `<button class="${i === top ? 'on' : ''}" data-go="plan/${n[1][0][0]}">${n[0]}</button>`).join('')}</div>
       <div class="psub">${NAV[top][1].map(x => { const k = SEQ.indexOf(x[0]); return `<button class="${x[0] === vid ? 'on' : k < step ? 'done' : ''}" data-go="plan/${x[0]}"><span class="n">${k < step ? '✓' : k + 1}</span>${x[1]}</button>`; }).join('')}</div>`; }

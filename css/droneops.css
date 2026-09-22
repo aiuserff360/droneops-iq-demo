@@ -24,3 +24,6 @@ body.ws-ops .rail-hero { background: linear-gradient(180deg, rgba(13,49,112,1) 0
 .brand { width: auto; min-width: 182px; } .brand-name { font-size: 21px; white-space: nowrap; } .brand-sub { font-size: 10.5px; white-space: nowrap; } .brand-mark { width: 26px; height: 26px; }
 .card.flush > .mmap, .card.flush > div > .mmap { flex: 1; border-radius: 0; }
 .opt-grid { grid-template-columns: repeat(auto-fit, minmax(78px, 1fr)); }
+.ws-switch { align-items: center; padding: 3px 4px 3px 10px; } .ws-lbl { font-size: 10.5px; letter-spacing: 1.2px; text-transform: uppercase; opacity: .75; margin-right: 4px; font-weight: 600; }
+.ws-switch button { height: 30px; padding: 0 12px; } .ws-switch button.on { box-shadow: 0 0 0 2px rgba(124,192,255,.35); }
+.mission-chip .small { display: block; line-height: 1.1; }
