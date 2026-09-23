@@ -29,3 +29,9 @@ body.ws-ops .rail-hero { background: linear-gradient(180deg, rgba(13,49,112,1) 0
 .mission-chip .small { display: block; line-height: 1.1; }
 .js-btn { transition: background .1s, color .1s; } .js-btn.on { background: var(--blue); color: #fff; }
 main.dark .kpi-val, main.dark .kpi-lbl { color: inherit; } main.dark .kpi-val { color: #fff; }
+.fld.edit { padding: 0 8px 0 0; } .fld.edit input, .fld.edit select, .fld.edit textarea { flex: 1; min-width: 0; border: 0; background: transparent; font: inherit; font-weight: 500; color: var(--ink); padding: 6px 9px; outline: none; width: 100%; } .fld.edit textarea { resize: vertical; font-weight: 400; color: var(--text); line-height: 1.4; }
+.fld.edit:focus-within { border-color: var(--blue); box-shadow: 0 0 0 2px var(--blue-100); } .fld.edit select { appearance: none; -webkit-appearance: none; cursor: pointer; } .fld.edit input[type=number] { text-align: right; }
+main.dark .fld.edit input, main.dark .fld.edit select { color: #fff; }
+.fld.edit input { min-width: 44px; padding: 6px 6px; } .fld.edit input[type=number] { -moz-appearance: textfield; } .fld.edit input[type=number]::-webkit-inner-spin-button, .fld.edit input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.frm.tight { grid-template-columns: minmax(70px, 38%) 1fr; } .card-h h3 .fld.edit, .card-h h3 .fld.edit input { width: 100%; }
+.card-h h3:has(.fld.edit) { flex: 1; min-width: 0; }
