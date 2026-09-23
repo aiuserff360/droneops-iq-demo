@@ -19,7 +19,7 @@ VQ.Plan = (() => {
   const sld = (pct, txt) => `<div class="row" style="gap:10px"><div class="sld"><i style="width:${pct}%"></i><b style="left:${pct}%"></b></div><b class="ink small" style="min-width:64px;text-align:right">${txt}</b></div>`;
   const opts = (list, cur, key) => `<div class="opt-grid">${list.map(o => `<button class="opt ${o[0] === cur ? 'on' : ''}" ${key ? `data-set="${key}=${o[0]}"` : `data-act="${o[1]} selected"`}>${I(o[2])}<span>${o[1]}</span></button>`).join('')}</div>`;
   const chk = (tone, title, text) => `<div class="chk ${tone}">${I(tone === 'ok' ? 'checkc' : tone === 'warn' ? 'alert' : 'octagon')}<div><b>${title}</b><span>${text}</span></div></div>`;
-  const droneRow = (d, right) => `<div class="li" style="align-items:center"><img src="assets/img/drone-small.jpg" alt="" style="width:54px;height:30px;object-fit:contain;flex:none"><div class="li-body"><div class="li-title">${d.name} <span class="muted small">${d.id}</span></div><div class="li-sub">${d.model}</div></div>${right}</div>`;
+  const droneRow = (d, right) => `<div class="li" style="align-items:center"><img src="assets/img/drone-small.jpg" alt="" style="width:54px;height:30px;object-fit:contain;flex:none"><div class="li-body"><div class="li-title">${d.name} <a data-go="drone/${d.id}" class="small">${d.id}</a></div><div class="li-sub">${d.model}</div></div>${right}</div>`;
 
   function head({ vid }) { const U = D.uc(), top = NAV.findIndex(n => n[1].some(x => x[0] === vid)), step = SEQ.indexOf(vid);
     return `<div class="page-head"><div><h1>Mission Planning</h1><div class="sub">${SUB[vid]}</div></div><div class="head-right">

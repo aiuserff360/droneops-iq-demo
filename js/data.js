@@ -8,7 +8,7 @@ VQ.workspace('ops', {
   brandSub: 'Drone Operations Intelligence Platform',
   tag: `<div class="flow">Plan ${VQ.I('arrow')} Orchestrate ${VQ.I('arrow')} Fly ${VQ.I('arrow')} Monitor ${VQ.I('arrow')} Analyze ${VQ.I('arrow')} Act</div><small>Smarter missions. Safer operations. Greater impact.</small>`,
   claim: '', search: 'Search missions, drones, locations…', hero: 'Plan Today.<br>See Tomorrow.<br>Operate Smarter.', strip: 'ONE FLEET. ANY MISSION.<br>ALWAYS READY.',
-  rail: [['home', 'Command Center', 'cc'], ['cal', 'Mission Planning', 'plan'], ['file', 'Missions', 'missions'], ['play', 'Live Operations', 'live'], ['net', 'Swarm Control', 'swarm'], ['drone', 'Drone Fleet', 'fleet'], ['video', 'Payloads &amp; Sensors', 'payloads'], ['mappin', 'Geofencing &amp; Airspace', 'airspace'], ['alert', 'Incidents &amp; Alerts', 'alerts', 3], ['bars', 'Data &amp; Analytics', 'analytics'], ['file', 'Reports', 'reports'], ['gear', 'Administration', 'admin']],
+  rail: [['home', 'Command Center', 'cc'], ['cal', 'Mission Planning', 'plan'], ['file', 'Missions', 'missions'], ['play', 'Live Operations', 'live'], ['gauge', 'Remote Pilot', 'pilot'], ['net', 'Swarm Control', 'swarm'], ['drone', 'Drone Fleet', 'fleet'], ['video', 'Payloads &amp; Sensors', 'payloads'], ['mappin', 'Geofencing &amp; Airspace', 'airspace'], ['alert', 'Incidents &amp; Alerts', 'alerts', 3], ['bars', 'Data &amp; Analytics', 'analytics'], ['file', 'Reports', 'reports'], ['gear', 'Administration', 'admin']],
   values: [{ icon: 'crosshair', title: 'Plan with Confidence', text: 'Accurate, efficient and safe missions.' }, { icon: 'net', title: 'Multi-Drone, Multi-Use', text: 'Any industry. Any environment.' }, { icon: 'bars', title: 'From Data to Decisions', text: 'Turn aerial data into real value.' }, { icon: 'shield', title: 'Safer Operations', text: 'People. Assets. Communities.' }],
 });
 
@@ -85,6 +85,6 @@ VQ.ops = (() => {
   ];
   D.sevTone = { critical: 'solid-crit', high: 'high', medium: 'medium', low: 'low' };
 
-  VQ.searchExtra.ops = [() => [...D.missions.map(m => ({ icon: 'route', label: `${m.id} · ${m.name}`, more: `${m.use} · ${m.status}`, kind: 'Mission', go: 'missions' })), ...D.drones.map(d => ({ icon: 'drone', label: `${d.id} · ${d.name}`, more: `${d.model} · ${d.status}`, kind: 'Drone', go: 'fleet' })), ...D.alerts.map(a => ({ icon: 'alert', label: a.title, more: a.where, kind: 'Alert', go: 'alerts' })), ...D.payloads.map(p => ({ icon: 'video', label: p.name, more: p.cat, kind: 'Payload', go: 'payloads' }))]];
+  VQ.searchExtra.ops = [() => [...D.missions.map(m => ({ icon: 'route', label: `${m.id} · ${m.name}`, more: `${m.use} · ${m.status}`, kind: 'Mission', go: `mission/${m.id}` })), ...D.drones.map(d => ({ icon: 'drone', label: `${d.id} · ${d.name}`, more: `${d.model} · ${d.status}`, kind: 'Drone', go: `drone/${d.id}` })), ...D.alerts.map(a => ({ icon: 'alert', label: a.title, more: a.where, kind: 'Alert', go: `alert/${a.id}` })), ...D.payloads.map(p => ({ icon: 'video', label: p.name, more: p.cat, kind: 'Payload', go: 'payloads' }))]];
   return D;
 })();
